@@ -1,0 +1,31 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.app {
+}
+
+@media (min-width: 600px) {
+  body {
+    margin: 2rem 10rem;
+  }
+}

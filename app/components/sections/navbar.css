@@ -1,0 +1,40 @@
+header {
+  margin-bottom: 3rem;
+}
+
+.news-categories li {
+  margin-right: 2rem;
+}
+
+.active {
+  color: rgb(187, 46, 31);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-categories ul {
+  display: flex;
+}
+
+.theme-toggler-container {
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .theme-toggler-container button {
+    margin: 1rem 0rem;
+    position: absolute;
+    right: 2px;
+  }
+}
