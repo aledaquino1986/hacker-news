@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loader from "../../../components/sections/loader/Loader";
 import {
   fetchTopStories,
   destructureNewsUrl
@@ -10,7 +11,8 @@ class Top extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: []
+      news: [],
+      isLoading: true
     };
   }
 
@@ -19,12 +21,23 @@ class Top extends Component {
   }
 
   render() {
-    return (
-      <h2>
-        These are the top news
-        <button onClick={() => console.log(this.state.news)}>Click</button>
-      </h2>
-    );
+    {
+      return this.state.isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          {this.state.news.map(newsStory => {
+            const { title, id, url } = newsStory;
+
+            return (
+              <h2 key={id}>
+                <a href={url}> {title}</a>
+              </h2>
+            );
+          })}
+        </div>
+      );
+    }
   }
 }
 

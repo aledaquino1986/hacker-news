@@ -41,7 +41,8 @@ export const destructureNewsUrl = (urls, component) => {
     )
   ).then(data => {
     component.setState({
-      news: data
+      news: data,
+      isLoading: false
     });
   });
 };
