@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import Loader from "../../../components/sections/loader/Loader";
-import {
-  fetchTopStories,
-  destructureNewsUrl
-} from "../../../services/apiUtils";
-
-const hackerNewsBaseUrl = "https://hacker-news.firebaseio.com/v0/";
+import Posts from "../../sections/posts/Posts";
+import { fetchTopStories } from "../../../services/apiUtils";
 
 class Top extends Component {
   constructor(props) {
@@ -27,12 +23,18 @@ class Top extends Component {
       ) : (
         <div>
           {this.state.news.map(newsStory => {
-            const { title, id, url } = newsStory;
+            const { title, id, url, by, time, descendants } = newsStory;
 
             return (
-              <h2 key={id}>
-                <a href={url}> {title}</a>
-              </h2>
+              <Posts
+                key={id}
+                title={title}
+                id={id}
+                url={url}
+                by={by}
+                time={time}
+                comments={descendants}
+              />
             );
           })}
         </div>

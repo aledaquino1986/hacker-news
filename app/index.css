@@ -21,7 +21,8 @@ ul {
   list-style: none;
 }
 
-.app {
+a:link {
+  text-decoration: none;
 }
 
 @media (min-width: 600px) {

@@ -1,7 +1,6 @@
-const hackerNewsBaseUrl = "https://hacker-news.firebaseio.com/v0/";
+import { hackerNewsBaseUrl, apiTopStoriesUrl } from "./constants";
 
 export const fetchTopStories = component => {
-  const apiTopStoriesUrl = `${hackerNewsBaseUrl}topstories.json?print=pretty`;
   const topStories = [];
   fetch(apiTopStoriesUrl)
     .then(response => response.json())
@@ -12,6 +11,7 @@ export const fetchTopStories = component => {
       }
 
       let topStoriesData = fetchIndividualNewsStory(topStories, component);
+
       destructureNewsUrl(topStoriesData, component);
     })
     .catch(err => err);

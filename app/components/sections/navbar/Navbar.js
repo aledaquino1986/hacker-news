@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../../context/ThemeContext";
 import { NavLink } from "react-router-dom";
 
 import "./navbar.css";
