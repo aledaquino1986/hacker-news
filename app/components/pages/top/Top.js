@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loader from "../../../components/sections/loader/Loader";
 import Posts from "../../sections/posts/Posts";
-import { fetchTopStories } from "../../../services/apiUtils";
+import { fetchNewsStories } from "../../../services/apiUtils";
 
 class Top extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Top extends Component {
   }
 
   componentDidMount() {
-    fetchTopStories(this);
+    fetchNewsStories(this, "top");
   }
 
   render() {

@@ -1,34 +1,40 @@
-import { hackerNewsBaseUrl, apiTopStoriesUrl } from "./constants";
+import {
+  hackerNewsBaseUrl,
+  apiTopStoriesUrl,
+  apiNewStoriesUrl
+} from "./constants";
 
-export const fetchTopStories = component => {
-  const topStories = [];
-  fetch(apiTopStoriesUrl)
+export const fetchNewsStories = (component, typeOfNews) => {
+  const newsStories = [];
+
+  const apiUrl = typeOfNews === "new" ? apiNewStoriesUrl : apiTopStoriesUrl;
+  fetch(apiUrl)
     .then(response => response.json())
     .then(news => {
       for (let key in news) {
         const individualNewspiUrl = `${hackerNewsBaseUrl}/item/${news[key]}.json?print=pretty`;
-        topStories.push({ [key]: individualNewspiUrl });
+        newsStories.push({ [key]: individualNewspiUrl });
       }
 
-      let topStoriesData = fetchIndividualNewsStory(topStories, component);
+      let newsStoriesData = fetchIndividualNewsStory(newsStories, component);
 
-      destructureNewsUrl(topStoriesData, component);
+      destructureNewsUrl(newsStoriesData, component);
     })
     .catch(err => err);
 };
 
-export const fetchIndividualNewsStory = (topStoriesLink, component) => {
-  const topStoriesUrl = topStoriesLink;
+export const fetchIndividualNewsStory = (newsStoriesLink, component) => {
+  const newsStoriesUrl = newsStoriesLink;
 
-  const limit30topStoriesUrl = topStoriesUrl.filter((story, index) => {
+  const limit30newsStoriesUrl = newsStoriesUrl.filter((story, index) => {
     return index <= 29;
   });
 
-  const topStoriesData = limit30topStoriesUrl.map(
+  const newsStoriesData = limit30newsStoriesUrl.map(
     (story, index) => story[index]
   );
 
-  return topStoriesData;
+  return newsStoriesData;
 };
 
 export const destructureNewsUrl = (urls, component) => {
@@ -40,8 +46,11 @@ export const destructureNewsUrl = (urls, component) => {
         .catch(err => err)
     )
   ).then(data => {
+    const filterNullData = data.filter(destructuredData => {
+      return destructuredData !== null;
+    });
     component.setState({
-      news: data,
+      news: filterNullData,
       isLoading: false
     });
   });

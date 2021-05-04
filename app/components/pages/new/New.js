@@ -1,7 +1,46 @@
-import React from "react";
+import React, { Component } from "react";
+import Loader from "../../../components/sections/loader/Loader";
+import Posts from "../../sections/posts/Posts";
+import { fetchNewsStories } from "../../../services/apiUtils";
 
-const New = () => {
-  return <h2>These are the New</h2>;
-};
+class Top extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      news: [],
+      isLoading: true
+    };
+  }
 
-export default New;
+  componentDidMount() {
+    fetchNewsStories(this, "new");
+  }
+
+  render() {
+    {
+      return this.state.isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          {this.state.news.map(newsStory => {
+            const { title, id, url, by, time, descendants } = newsStory;
+
+            return (
+              <Posts
+                key={id}
+                title={title}
+                id={id}
+                url={url}
+                by={by}
+                time={time}
+                comments={descendants}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  }
+}
+
+export default Top;
