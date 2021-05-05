@@ -3,7 +3,9 @@ import Loader from "../../../components/sections/loader/Loader";
 import Posts from "../../sections/posts/Posts";
 import { fetchNewsStories } from "../../../services/apiUtils";
 
-class Top extends Component {
+import "./newsStories.css";
+
+class NewsStories extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,7 @@ class Top extends Component {
   }
 
   componentDidMount() {
-    fetchNewsStories(this, "new");
+    fetchNewsStories(this, this.props.typeOfNewsStory);
   }
 
   render() {
@@ -21,7 +23,7 @@ class Top extends Component {
       return this.state.isLoading ? (
         <Loader />
       ) : (
-        <div>
+        <section className="posts-section">
           {this.state.news.map(newsStory => {
             const { title, id, url, by, time, descendants } = newsStory;
 
@@ -37,10 +39,10 @@ class Top extends Component {
               />
             );
           })}
-        </div>
+        </section>
       );
     }
   }
 }
 
-export default Top;
+export default NewsStories;

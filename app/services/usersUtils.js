@@ -1,4 +1,3 @@
-import { Component } from "react";
 import { userApiDataBaseUrl, apiUrlEnd } from "./constants";
 
 export const getUserJsonData = (id, component) => {

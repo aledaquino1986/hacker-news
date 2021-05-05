@@ -6,7 +6,14 @@ header {
   margin-right: 2rem;
 }
 
-.active {
+.news-categories li a {
+  font-weight: bold;
+  color: black;
+  font-weight: 2rem;
+}
+
+.app-dark .news-categories li a.active,
+.app-light .news-categories li a.active {
   color: rgb(187, 46, 31);
 }
 

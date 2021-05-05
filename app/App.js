@@ -1,11 +1,11 @@
 import React from "react";
-import Top from "./components/pages/top/Top";
-import New from "./components/pages/new/New";
+
 import Navbar from "./components/sections/navbar/Navbar";
 import ThemeContextProvider from "./context/ThemeContext";
 import BodyLayout from "./components/layout/BodyLayout";
 import User from "./components/pages/user/User";
 import Comments from "./components/pages/comments/Comments";
+import NewsStories from "./components/pages/newsStories/NewsStories";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
@@ -14,9 +14,20 @@ const App = () => {
       <ThemeContextProvider>
         <BodyLayout>
           <Navbar />
-
-          <Route exact path="/" component={Top} />
-          <Route exact path="/new" component={New} />
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return <NewsStories typeOfNewsStory="top" />;
+            }}
+          />
+          <Route
+            exact
+            path="/new"
+            render={() => {
+              return <NewsStories typeOfNewsStory="new" />;
+            }}
+          />
           <Route path="/user" component={User} />
           <Route path="/post" component={Comments} />
         </BodyLayout>

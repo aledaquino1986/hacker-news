@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ThemeButton from "../../units/button/ThemeButton";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { NavLink } from "react-router-dom";
 
@@ -26,7 +27,7 @@ const Navbar = () => {
               </div>
 
               <div className="theme-toggler-container">
-                <button onClick={context.toggleTheme}>🔦</button>
+                <ThemeButton toggleTheme={toggleTheme} theme={theme} />
               </div>
             </nav>
           </header>

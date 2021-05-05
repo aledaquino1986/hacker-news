@@ -25,6 +25,22 @@ a:link {
   text-decoration: none;
 }
 
+/*Dark mode*/
+
+.app-dark .news-categories li a {
+  font-weight: bold;
+  color: rgb(203, 203, 203);
+  font-weight: 2rem;
+}
+
+.app-dark a {
+  color: rgb(203, 203, 203);
+}
+
+.app-dark p {
+  color: gray;
+}
+
 @media (min-width: 600px) {
   body {
     margin: 2rem 10rem;
