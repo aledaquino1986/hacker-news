@@ -3,14 +3,14 @@ import "./loader.css";
 
 class Loader extends Component {
   state = {
-    content: "Loading"
+    content: this.props.fetchingText
   };
 
   componentDidMount() {
     this.interval = setInterval(() => {
-      if (this.state.content === "Loading...") {
+      if (this.state.content === this.props.fetchingText + "...") {
         this.setState({
-          content: "Loading"
+          content: this.props.fetchingText
         });
       } else {
         this.setState(previousState => {

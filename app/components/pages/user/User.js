@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import queryString from "query-string";
+import { getTime } from "../../../utils/timeUtils";
+import Loader from "../../sections/loader/Loader";
+import Posts from "../../sections/posts/Posts";
 
 import { getUserJsonData } from "../../../services/usersUtils";
 
 class User extends Component {
   state = {
-    user: {}
+    user: {},
+    news: [],
+    isLoading: true
   };
 
   componentDidMount() {
@@ -14,14 +19,43 @@ class User extends Component {
   }
 
   render() {
-    return (
-      <div className="user-container">
-        <h2>User</h2>
-        <p>Joined Date has 0 karma</p>
+    const { about, created, id, karma } = this.state.user;
+    {
+      return this.state.isLoading ? (
+        <Loader fetchingText="Fetching user" />
+      ) : (
+        <section className="posts-section">
+          <div className="user-container">
+            <h2>{id}</h2>
+            <p>
+              Joined {getTime(created)}. Has {karma} karma
+            </p>
 
-        <h3>Posts</h3>
-      </div>
-    );
+            <h5 className="about"> {about} </h5>
+
+            <h3>Posts</h3>
+
+            <section className="posts-section">
+              {this.state.news.map(newsStory => {
+                const { title, id, url, by, time, descendants } = newsStory;
+
+                return (
+                  <Posts
+                    key={id}
+                    title={title}
+                    id={id}
+                    url={url}
+                    by={by}
+                    time={time}
+                    comments={descendants}
+                  />
+                );
+              })}
+            </section>
+          </div>
+        </section>
+      );
+    }
   }
 }
 

@@ -21,7 +21,7 @@ class NewsStories extends Component {
   render() {
     {
       return this.state.isLoading ? (
-        <Loader />
+        <Loader fetchingText="Loading" />
       ) : (
         <section className="posts-section">
           {this.state.news.map(newsStory => {

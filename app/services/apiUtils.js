@@ -11,19 +11,14 @@ export const fetchNewsStories = (component, typeOfNews) => {
   fetch(apiUrl)
     .then(response => response.json())
     .then(news => {
-      for (let key in news) {
-        const individualNewspiUrl = `${hackerNewsBaseUrl}/item/${news[key]}.json?print=pretty`;
-        newsStories.push({ [key]: individualNewspiUrl });
-      }
-
-      let newsStoriesData = fetchIndividualNewsStory(newsStories, component);
-
+      createNewsStoriesUrl(newsStories, news);
+      let newsStoriesData = fetchIndividualNewsStory(newsStories);
       destructureNewsUrl(newsStoriesData, component);
     })
     .catch(err => err);
 };
 
-export const fetchIndividualNewsStory = (newsStoriesLink, component) => {
+export const fetchIndividualNewsStory = newsStoriesLink => {
   const newsStoriesUrl = newsStoriesLink;
 
   const limit30newsStoriesUrl = newsStoriesUrl.filter((story, index) => {
@@ -37,7 +32,11 @@ export const fetchIndividualNewsStory = (newsStoriesLink, component) => {
   return newsStoriesData;
 };
 
-export const destructureNewsUrl = (urls, component) => {
+export const destructureNewsUrl = (
+  urls,
+  component,
+  typeOfNews = "topOrNew"
+) => {
   Promise.all(
     urls.map(url =>
       fetch(url)
@@ -49,9 +48,25 @@ export const destructureNewsUrl = (urls, component) => {
     const filterNullData = data.filter(destructuredData => {
       return destructuredData !== null;
     });
+
+    let filterComments;
+
+    if (typeOfNews === "user") {
+      filterComments = filterNullData.filter(data => {
+        return data.type !== "comment";
+      });
+    }
+
     component.setState({
-      news: filterNullData,
+      news: typeOfNews === "user" ? filterComments : filterNullData,
       isLoading: false
     });
   });
+};
+
+export const createNewsStoriesUrl = (containerArray, newsIDobject) => {
+  for (let key in newsIDobject) {
+    const individualNewspiUrl = `${hackerNewsBaseUrl}/item/${newsIDobject[key]}.json?print=pretty`;
+    containerArray.push({ [key]: individualNewspiUrl });
+  }
 };
