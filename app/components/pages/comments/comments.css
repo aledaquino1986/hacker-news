@@ -9,4 +9,7 @@
 
 .comments-container {
   margin: 3rem 0;
+  background-color: rgba(128, 128, 128, 0.14);
+  padding: 1rem;
+  word-wrap: break-word;
 }

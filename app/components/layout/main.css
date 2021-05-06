@@ -11,3 +11,9 @@
   background-color: black;
   color: white;
 }
+
+@media (min-width: 600px) {
+  .body {
+    margin: 2rem 6rem;
+  }
+}
