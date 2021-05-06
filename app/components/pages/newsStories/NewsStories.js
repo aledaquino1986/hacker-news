@@ -15,7 +15,7 @@ class NewsStories extends Component {
   }
 
   componentDidMount() {
-    fetchNewsStories(this, this.props.typeOfNewsStory);
+    fetchNewsStories(this, this.props.typeOfNewsStory, "topOrNew");
   }
 
   render() {

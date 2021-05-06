@@ -13,6 +13,7 @@ export const fetchNewsStories = (component, typeOfNews) => {
     .then(news => {
       createNewsStoriesUrl(newsStories, news);
       let newsStoriesData = fetchIndividualNewsStory(newsStories);
+
       destructureNewsUrl(newsStoriesData, component);
     })
     .catch(err => err);
@@ -31,6 +32,49 @@ export const fetchIndividualNewsStory = newsStoriesLink => {
 
   return newsStoriesData;
 };
+
+// export const destructureNewsUrl = (urls, component, typeOfNews) => {
+//   Promise.all(
+//     urls.map(url =>
+//       fetch(url)
+//         .then(response => response.json())
+//         .then(data => data)
+//         .catch(err => err)
+//     )
+//   ).then(data => {
+//     const filteredOutNullData = data.filter(destructuredData => {
+//       return destructuredData !== null;
+//     });
+
+//     let filterOutUserComments;
+
+//     if (typeOfNews === "topOrNew") {
+//       component.setState({
+//         news: filterNullData,
+//         isLoading: false
+//       });
+//     }
+
+//     if (typeOfNews === "user") {
+//       filterOutUserComments = filteredOutNullData.filter(data => {
+//         return data.type !== "comment";
+//       });
+
+//       component.setState({
+//         news:
+//           typeOfNews === "user" ? filterOutUserComments : filteredOutNullData,
+//         isLoading: false
+//       });
+//     }
+
+//     if (typeOfNews === "comment") {
+//       component.setState({
+//         comments: filteredOutNullData,
+//         isLoading: false
+//       });
+//     }
+//   });
+// };
 
 export const destructureNewsUrl = (
   urls,
@@ -51,16 +95,23 @@ export const destructureNewsUrl = (
 
     let filterComments;
 
-    if (typeOfNews === "user") {
-      filterComments = filterNullData.filter(data => {
-        return data.type !== "comment";
+    if (typeOfNews === "comment") {
+      component.setState({
+        comments: filterNullData,
+        isLoading: false
+      });
+    } else if (typeOfNews === "user" || typeOfNews === "topOrNew") {
+      if (typeOfNews === "user") {
+        filterComments = filterNullData.filter(data => {
+          return data.type !== "comment";
+        });
+      }
+
+      component.setState({
+        news: typeOfNews === "user" ? filterComments : filterNullData,
+        isLoading: false
       });
     }
-
-    component.setState({
-      news: typeOfNews === "user" ? filterComments : filterNullData,
-      isLoading: false
-    });
   });
 };
 

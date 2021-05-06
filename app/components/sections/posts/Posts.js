@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getTime } from "../../../utils/timeUtils";
+import UserDetailsSubheading from "../../units/UserDetailsSubheading";
 
 import "./posts.css";
 
@@ -13,10 +14,13 @@ const Posts = ({ title, id, url, by, time, comments }) => {
         {" "}
         <a href={url}> {title} </a>{" "}
       </h4>
-      <p>
-        by <Link to={`user?id=${by}`}>{by}</Link> on {timeOfPost} with{" "}
-        <Link to={`post?id=${id}`}>{comments}</Link> comments
-      </p>
+
+      <UserDetailsSubheading
+        by={by}
+        comments={comments}
+        timeOfPost={timeOfPost}
+        id={id}
+      />
     </div>
   );
 };
