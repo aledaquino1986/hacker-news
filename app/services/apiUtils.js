@@ -5,24 +5,21 @@ import {
 } from "./constants";
 
 export const fetchNewsStories = (component, typeOfNews) => {
-  const newsStories = [];
-
   const apiUrl = typeOfNews === "new" ? apiNewStoriesUrl : apiTopStoriesUrl;
   fetch(apiUrl)
     .then(response => response.json())
-    .then(news => {
-      createNewsStoriesUrl(newsStories, news);
-      let newsStoriesData = fetchIndividualNewsStory(newsStories);
+    .then(newsId => {
+      const newsStoriesUrls = convertIdsToNewsUrls(newsId);
 
-      destructureNewsUrl(newsStoriesData, component);
+      let newsStoriesList_30Items = fetch30NewsStoriesUrls(newsStoriesUrls);
+
+      destructureNewsUrl(newsStoriesList_30Items, component);
     })
     .catch(err => err);
 };
 
-export const fetchIndividualNewsStory = newsStoriesLink => {
-  const newsStoriesUrl = newsStoriesLink;
-
-  const limit30newsStoriesUrl = newsStoriesUrl.filter((story, index) => {
+export const fetch30NewsStoriesUrls = newsStoriesLink => {
+  const limit30newsStoriesUrl = newsStoriesLink.filter((story, index) => {
     return index <= 29;
   });
 
@@ -33,49 +30,6 @@ export const fetchIndividualNewsStory = newsStoriesLink => {
   return newsStoriesData;
 };
 
-// export const destructureNewsUrl = (urls, component, typeOfNews) => {
-//   Promise.all(
-//     urls.map(url =>
-//       fetch(url)
-//         .then(response => response.json())
-//         .then(data => data)
-//         .catch(err => err)
-//     )
-//   ).then(data => {
-//     const filteredOutNullData = data.filter(destructuredData => {
-//       return destructuredData !== null;
-//     });
-
-//     let filterOutUserComments;
-
-//     if (typeOfNews === "topOrNew") {
-//       component.setState({
-//         news: filterNullData,
-//         isLoading: false
-//       });
-//     }
-
-//     if (typeOfNews === "user") {
-//       filterOutUserComments = filteredOutNullData.filter(data => {
-//         return data.type !== "comment";
-//       });
-
-//       component.setState({
-//         news:
-//           typeOfNews === "user" ? filterOutUserComments : filteredOutNullData,
-//         isLoading: false
-//       });
-//     }
-
-//     if (typeOfNews === "comment") {
-//       component.setState({
-//         comments: filteredOutNullData,
-//         isLoading: false
-//       });
-//     }
-//   });
-// };
-
 export const destructureNewsUrl = (
   urls,
   component,
@@ -85,7 +39,9 @@ export const destructureNewsUrl = (
     urls.map(url =>
       fetch(url)
         .then(response => response.json())
-        .then(data => data)
+        .then(data => {
+          return data;
+        })
         .catch(err => err)
     )
   ).then(data => {
@@ -115,9 +71,11 @@ export const destructureNewsUrl = (
   });
 };
 
-export const createNewsStoriesUrl = (containerArray, newsIDobject) => {
+export const convertIdsToNewsUrls = newsIDobject => {
+  const containerArray = [];
   for (let key in newsIDobject) {
     const individualNewspiUrl = `${hackerNewsBaseUrl}/item/${newsIDobject[key]}.json?print=pretty`;
     containerArray.push({ [key]: individualNewspiUrl });
   }
+  return containerArray;
 };

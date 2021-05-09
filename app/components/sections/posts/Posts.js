@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { getTime } from "../../../utils/timeUtils";
 import UserDetailsSubheading from "../../units/UserDetailsSubheading";
 

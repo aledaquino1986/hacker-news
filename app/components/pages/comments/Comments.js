@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import queryString from "query-string";
 import Loader from "../../sections/loader/Loader";
 import UserDetailsSubheading from "../../units/UserDetailsSubheading";
-import { Link } from "react-router-dom";
+
 import { getTime } from "../../../utils/timeUtils";
 
 import { getIndividualPost } from "../../../services/commentsUtils";
@@ -12,6 +12,7 @@ class Comments extends Component {
   state = {
     comments: [],
     commentsGeneralInfo: {},
+
     isLoading: true
   };
 
@@ -29,6 +30,7 @@ class Comments extends Component {
       title,
       url
     } = this.state.commentsGeneralInfo;
+
     const timeOfPost = getTime(time);
     {
       return this.state.isLoading ? (
@@ -59,14 +61,15 @@ class Comments extends Component {
               </div>
             );
           })}
+
+          {this.state.comments.map((commentsOfComments, index) => {
+            {
+              commentsOfComments.kids && console.log(commentsOfComments.kids);
+            }
+          })}
         </section>
       );
     }
-    // return (
-    //   <div>
-    //     <h2>Comments</h2>
-    //   </div>
-    // );
   }
 }
 

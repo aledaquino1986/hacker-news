@@ -1,7 +1,7 @@
 import { userApiDataBaseUrl, apiUrlEnd } from "./constants";
 import {
-  fetchIndividualNewsStory,
-  createNewsStoriesUrl,
+  fetch30NewsStoriesUrls,
+  convertIdsToNewsUrls,
   destructureNewsUrl
 } from "./apiUtils";
 
@@ -13,8 +13,8 @@ export const getUserJsonData = (id, component) => {
     .then(data => {
       const urlArray = [];
 
-      createNewsStoriesUrl(urlArray, data.submitted);
-      let newsStoriesData = fetchIndividualNewsStory(urlArray);
+      convertIdsToNewsUrls(urlArray, data.submitted);
+      let newsStoriesData = fetch30NewsStoriesUrls(urlArray);
       destructureNewsUrl(newsStoriesData, component, "user");
       component.setState({
         user: data

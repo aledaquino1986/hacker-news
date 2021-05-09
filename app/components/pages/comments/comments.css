@@ -13,3 +13,12 @@
   padding: 1rem;
   word-wrap: break-word;
 }
+
+.comments-container p,
+.comments-container div {
+  margin-top: 1rem;
+}
+
+.app-dark .comments-container {
+  color: #dadada;
+}
