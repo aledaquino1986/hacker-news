@@ -9,7 +9,7 @@
 
 .comments-container {
   margin: 3rem 0;
-  background-color: rgba(128, 128, 128, 0.14);
+  background-color: rgba(128, 128, 128, 0.062);
   padding: 1rem;
   word-wrap: break-word;
 }
@@ -21,4 +21,9 @@
 
 .app-dark .comments-container {
   color: #dadada;
+  background-color: rgba(128, 128, 128, 0.212);
+}
+
+.deleted-comment {
+  font-style: italic;
 }

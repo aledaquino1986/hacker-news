@@ -21,6 +21,44 @@ class Comments extends Component {
 
     getIndividualPost(id, this);
   }
+
+  renderComment = comments => {
+    const renderedComments = comments.map((comments, index) => {
+      if (comments.deleted === true || comments.dead === true) {
+        return (
+          <div className="comments-container" key={Math.random()}>
+            <p className="deleted-comment">Deleted comment</p>
+          </div>
+        );
+      } else if (comments.id === undefined) {
+        return null;
+      } else {
+        return comments.kids ? (
+          <div className="comments-container" key={Math.random()}>
+            <UserDetailsSubheading
+              by={comments.by}
+              timeOfPost={getTime(comments.time)}
+              id={comments.id}
+            />
+            <div dangerouslySetInnerHTML={{ __html: comments.text }}></div>
+
+            {comments.kids && this.renderComment(comments.kids)}
+          </div>
+        ) : (
+          <div className="comments-container" key={Math.random()}>
+            <UserDetailsSubheading
+              by={comments.by}
+              timeOfPost={getTime(comments.time)}
+              id={comments.id}
+            />
+            <div dangerouslySetInnerHTML={{ __html: comments.text }}></div>
+          </div>
+        );
+      }
+    });
+
+    return renderedComments;
+  };
   render() {
     const {
       by,
@@ -49,24 +87,7 @@ class Comments extends Component {
             />
           </div>
 
-          {this.state.comments.map(comments => {
-            return (
-              <div className="comments-container" key={comments.id}>
-                <UserDetailsSubheading
-                  by={comments.by}
-                  timeOfPost={getTime(comments.time)}
-                  id={comments.id}
-                />
-                <div dangerouslySetInnerHTML={{ __html: comments.text }}></div>
-              </div>
-            );
-          })}
-
-          {this.state.comments.map((commentsOfComments, index) => {
-            {
-              commentsOfComments.kids && console.log(commentsOfComments.kids);
-            }
-          })}
+          {this.renderComment(this.state.comments)}
         </section>
       );
     }
