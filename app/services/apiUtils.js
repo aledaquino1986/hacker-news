@@ -15,7 +15,7 @@ export const fetchNewsStories = (component, typeOfNews) => {
 
       destructureNewsUrl(newsStoriesList_30Items, component);
     })
-    .catch(err => err);
+    .catch(err => setErrorstate(component, err));
 };
 
 export const fetch30NewsStoriesUrls = newsStoriesLink => {
@@ -42,7 +42,7 @@ export const destructureNewsUrl = (
         .then(data => {
           return data;
         })
-        .catch(err => err)
+        .catch(err => err => setErrorstate(component, err))
     )
   ).then(data => {
     const filterNullData = data.filter(destructuredData => {
@@ -65,7 +65,8 @@ export const destructureNewsUrl = (
 
       component.setState({
         news: typeOfNews === "user" ? filterComments : filterNullData,
-        isLoading: false
+        isLoading: false,
+        err: false
       });
     }
   });
@@ -78,4 +79,12 @@ export const convertIdsToNewsUrls = newsIDobject => {
     containerArray.push({ [key]: individualNewspiUrl });
   }
   return containerArray;
+};
+
+const setErrorstate = (component, err) => {
+  console.log(component);
+  console.log(err);
+  return component.setState({
+    err: true
+  });
 };

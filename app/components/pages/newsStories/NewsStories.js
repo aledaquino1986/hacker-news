@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Loader from "../../../components/sections/loader/Loader";
 import Posts from "../../sections/posts/Posts";
+import ErrorHandler from "../../sections/errorHandler/ErrorHandler";
 import { fetchNewsStories } from "../../../services/apiUtils";
 
 import "./newsStories.css";
@@ -10,7 +11,8 @@ class NewsStories extends Component {
     super(props);
     this.state = {
       news: [],
-      isLoading: true
+      isLoading: true,
+      err: false
     };
   }
 
@@ -20,7 +22,9 @@ class NewsStories extends Component {
 
   render() {
     {
-      return this.state.isLoading ? (
+      return this.state.err ? (
+        <ErrorHandler />
+      ) : this.state.isLoading ? (
         <Loader fetchingText="Loading" />
       ) : (
         <section className="posts-section">

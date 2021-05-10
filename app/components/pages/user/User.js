@@ -5,7 +5,7 @@ import Loader from "../../sections/loader/Loader";
 import Posts from "../../sections/posts/Posts";
 
 import { getUserJsonData } from "../../../services/usersUtils";
-
+import "./user.css";
 class User extends Component {
   state = {
     user: {},
@@ -28,10 +28,11 @@ class User extends Component {
           <div className="user-container">
             <h2>{id}</h2>
             <p>
-              Joined {getTime(created)}. Has {karma} karma
+              Joined <span className="user-details">{getTime(created)}</span>.
+              Has <span className="user-details">{karma}</span> karma
             </p>
 
-            <h5 className="about"> {about} </h5>
+            <div dangerouslySetInnerHTML={{ __html: about }}></div>
 
             <h3>Posts</h3>
 

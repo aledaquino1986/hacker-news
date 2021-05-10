@@ -1,0 +1,7 @@
+.user-container p {
+  margin-bottom: 1rem;
+}
+.user-details {
+  color: gray;
+  font-weight: bold;
+}

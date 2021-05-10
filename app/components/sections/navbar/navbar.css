@@ -29,6 +29,7 @@ nav {
 
 .theme-toggler-container {
   position: relative;
+  margin-bottom: 3rem;
 }
 
 @media (max-width: 600px) {
