@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./loader.css";
 
 class Loader extends Component {
@@ -32,3 +33,7 @@ class Loader extends Component {
 }
 
 export default Loader;
+
+Loader.propTypes = {
+  fetchingText: PropTypes.string.isRequired
+};

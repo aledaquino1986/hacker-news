@@ -2,6 +2,7 @@ import React from "react";
 
 import { getTime } from "../../../utils/timeUtils";
 import UserDetailsSubheading from "../../units/UserDetailsSubheading";
+import PropTypes from "prop-types";
 
 import "./posts.css";
 
@@ -26,3 +27,12 @@ const Posts = ({ title, id, url, by, time, comments }) => {
 };
 
 export default Posts;
+
+Posts.propTypes = {
+  by: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  comments: PropTypes.number,
+  time: PropTypes.number.isRequired
+};

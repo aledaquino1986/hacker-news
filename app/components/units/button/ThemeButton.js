@@ -1,6 +1,8 @@
 import React from "react";
 import "./button.css";
 
+import PropTypes from "prop-types";
+
 const ThemeButton = ({ theme, toggleTheme }) => {
   return (
     <button
@@ -14,3 +16,8 @@ const ThemeButton = ({ theme, toggleTheme }) => {
 };
 
 export default ThemeButton;
+
+ThemeButton.propTypes = {
+  theme: PropTypes.string.isRequired,
+  toggleTheme: PropTypes.func.isRequired
+};

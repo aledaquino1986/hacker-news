@@ -4,8 +4,8 @@ import Loader from "../../sections/loader/Loader";
 import UserDetailsSubheading from "../../units/UserDetailsSubheading";
 
 import { getTime } from "../../../utils/timeUtils";
-
 import { getIndividualPost } from "../../../services/commentsUtils";
+
 import "./comments.css";
 
 class Comments extends Component {

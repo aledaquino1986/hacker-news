@@ -3,6 +3,7 @@ import Loader from "../../../components/sections/loader/Loader";
 import Posts from "../../sections/posts/Posts";
 import ErrorHandler from "../../sections/errorHandler/ErrorHandler";
 import { fetchNewsStories } from "../../../services/apiUtils";
+import PropTypes from "prop-types";
 
 import "./newsStories.css";
 
@@ -50,3 +51,7 @@ class NewsStories extends Component {
 }
 
 export default NewsStories;
+
+NewsStories.PropTypes = {
+  typeOfNewsStory: PropTypes.string.isRequired
+};
