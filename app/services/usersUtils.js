@@ -11,10 +11,9 @@ export const getUserJsonData = (id, component) => {
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      const urlArray = [];
-
-      convertIdsToNewsUrls(urlArray, data.submitted);
+      const urlArray = convertIdsToNewsUrls(data.submitted);
       let newsStoriesData = fetch30NewsStoriesUrls(urlArray);
+
       destructureNewsUrl(newsStoriesData, component, "user");
       component.setState({
         user: data
