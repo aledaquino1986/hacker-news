@@ -10,26 +10,30 @@ import NewsStories from "./components/pages/newsStories/NewsStories";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
+  const paths = [
+    { path: "/", typeOfNewsStory: "top" },
+    { path: "/new", typeOfNewsStory: "new" }
+  ];
   return (
     <Router>
       <ThemeContextProvider>
         <BodyLayout>
           <Navbar />
+
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => {
-                return <NewsStories typeOfNewsStory="top" />;
-              }}
-            />
-            <Route
-              exact
-              path="/new"
-              render={() => {
-                return <NewsStories typeOfNewsStory="new" />;
-              }}
-            />
+            {paths.map(data => {
+              const { path, typeOfNewsStory } = data;
+              return (
+                <Route
+                  key={typeOfNewsStory}
+                  exact
+                  path={path}
+                  render={() => (
+                    <NewsStories typeOfNewsStory={typeOfNewsStory} />
+                  )}
+                />
+              );
+            })}
             <Route path="/user" component={User} />
             <Route path="/post" component={Comments} />
             <Route render={() => <Page404 />} />

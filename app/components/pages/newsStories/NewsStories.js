@@ -18,7 +18,7 @@ class NewsStories extends Component {
   }
 
   componentDidMount() {
-    fetchNewsStories(this, this.props.typeOfNewsStory, "topOrNew");
+    fetchNewsStories(this, this.props.typeOfNewsStory);
   }
 
   render() {
@@ -52,6 +52,6 @@ class NewsStories extends Component {
 
 export default NewsStories;
 
-NewsStories.PropTypes = {
+NewsStories.propTypes = {
   typeOfNewsStory: PropTypes.string.isRequired
 };

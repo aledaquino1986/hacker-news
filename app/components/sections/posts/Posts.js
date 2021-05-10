@@ -31,7 +31,7 @@ export default Posts;
 Posts.propTypes = {
   by: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   id: PropTypes.number.isRequired,
   comments: PropTypes.number,
   time: PropTypes.number.isRequired
