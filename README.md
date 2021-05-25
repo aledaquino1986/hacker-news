@@ -22,7 +22,7 @@ Topics of the course:
 
 ### Goal
 
-Cloning the the Hacker news site, using the tools obtained from Ui.dev's React course.
+Creating a (soft) Hacker news site clone, using the tools learned from Ui.dev's React course.
 
 ## Author
 
