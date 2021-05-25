@@ -12,6 +12,17 @@ class ThemeContextProvider extends Component {
       theme: this.state.theme === "light" ? "dark" : "light"
     });
   };
+
+  componentDidMount() {
+    this.setState({
+      theme: localStorage.getItem("darkLightMode") || "light"
+    });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("darkLightMode", this.state.theme);
+  }
+
   render() {
     return (
       <ThemeContext.Provider
