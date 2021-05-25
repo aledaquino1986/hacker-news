@@ -37,8 +37,8 @@ a:link {
   color: rgb(203, 203, 203);
 }
 
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
   body {
-    margin: 2rem 6rem;
+    padding: 2rem 6rem;
   }
-}
+} */

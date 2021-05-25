@@ -5,8 +5,6 @@ import ErrorHandler from "../../sections/errorHandler/ErrorHandler";
 import { fetchNewsStories } from "../../../services/apiUtils";
 import PropTypes from "prop-types";
 
-import "./newsStories.css";
-
 class NewsStories extends Component {
   constructor(props) {
     super(props);
