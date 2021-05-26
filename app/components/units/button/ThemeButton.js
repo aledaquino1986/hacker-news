@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../../context/ThemeContext";
 import "./button.css";
 
 import PropTypes from "prop-types";
 
-const ThemeButton = ({ theme, toggleTheme }) => {
+const ThemeButton = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <button
       className="theme-button"
@@ -18,6 +20,6 @@ const ThemeButton = ({ theme, toggleTheme }) => {
 export default ThemeButton;
 
 ThemeButton.propTypes = {
-  theme: PropTypes.string.isRequired,
-  toggleTheme: PropTypes.func.isRequired
+  theme: PropTypes.string,
+  toggleTheme: PropTypes.func
 };
