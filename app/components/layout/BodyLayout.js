@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./main.css";
 import { ThemeContext } from "../../context/ThemeContext";
 
 const BodyLayout = ({ children }) => {
-  return (
-    <ThemeContext.Consumer>
-      {context => {
-        const { theme } = context;
-        return <div className={`body app-${theme}`}>{children}</div>;
-      }}
-    </ThemeContext.Consumer>
-  );
+  const { theme } = useContext(ThemeContext);
+
+  return <div className={`body app-${theme}`}>{children}</div>;
 };
 
 export default BodyLayout;

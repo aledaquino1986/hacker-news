@@ -1,39 +1,27 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./loader.css";
 
-class Loader extends Component {
-  state = {
-    content: this.props.fetchingText
-  };
+const Loader = ({ fetchingText = "Loading" }) => {
+  const [content, setContent] = useState(fetchingText);
 
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      if (this.state.content === this.props.fetchingText + "...") {
-        this.setState({
-          content: this.props.fetchingText
-        });
-      } else {
-        this.setState(previousState => {
-          return {
-            content: previousState.content + "."
-          };
-        });
-      }
+  useEffect(() => {
+    let interval = setInterval(() => {
+      content === fetchingText + "..."
+        ? setContent(fetchingText)
+        : setContent(content + ".");
     }, 300);
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [content]);
 
-  render() {
-    return <h2 className="loader">{this.state.content}</h2>;
-  }
-}
-
-export default Loader;
+  return <h2 className="loader">{content}</h2>;
+};
 
 Loader.propTypes = {
-  fetchingText: PropTypes.string.isRequired
+  fetchingText: PropTypes.string
 };
+
+export default Loader;
